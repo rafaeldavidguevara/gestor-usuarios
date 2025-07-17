@@ -8,7 +8,6 @@ public class GestorUsuariosApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GestorUsuariosApplication.class, args);
-		System.out.println("Hola Mundo!!");
 	}
 
 }
