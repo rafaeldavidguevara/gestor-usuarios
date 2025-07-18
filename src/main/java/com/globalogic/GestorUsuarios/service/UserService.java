@@ -1,19 +1,22 @@
 package com.globalogic.GestorUsuarios.service;
 
 import com.globalogic.GestorUsuarios.entity.UserEntity;
+import com.globalogic.GestorUsuarios.repository.UserRepository;
 import com.globalogic.GestorUsuarios.util.dto.SignUpRequestDto;
 import com.globalogic.GestorUsuarios.util.dto.SignUpResponseDto;
 import com.globalogic.GestorUsuarios.util.mapper.UserMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class UserService {
+    private final UserRepository userRepository;
 
     public SignUpResponseDto signUp(SignUpRequestDto signUpRequestDto) {
         UserEntity userEntity = UserMapper.toEntity(signUpRequestDto);
-        //Save
-        SignUpResponseDto signUpResponseDto = UserMapper.toDto(userEntity);
-        return signUpResponseDto;
+        UserEntity pesistedUserEntity = userRepository.save(userEntity);
+        return UserMapper.toDto(pesistedUserEntity);
     }
 
 }

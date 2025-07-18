@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -24,6 +25,7 @@ public class UserEntity {
     private String token;
     private boolean isActive;
     private String name;
+    @Column(unique = true)
     private String email;
     private String password;
 }
