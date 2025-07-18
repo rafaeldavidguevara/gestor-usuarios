@@ -1,8 +1,10 @@
 package com.globalogic.GestorUsuarios.controller;
 
+import com.globalogic.GestorUsuarios.service.UserService;
 import com.globalogic.GestorUsuarios.util.dto.SignUpRequestDto;
 import com.globalogic.GestorUsuarios.util.dto.SignUpResponseDto;
 import com.globalogic.GestorUsuarios.util.helper.TimestampHelper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,21 +16,15 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/user")
+@RequiredArgsConstructor
 public class UserController {
 
+    private final UserService userService;
+
     @PostMapping(value = "/sign-up", produces = { "application/json" })
-    public ResponseEntity<SignUpResponseDto> obtenerTareas(@Valid @RequestBody SignUpRequestDto signUpRequestDto) {
-        return ResponseEntity.ok(SignUpResponseDto.builder()
-                        .id(UUID.randomUUID())
-                        .created(TimestampHelper.getNowDate())
-                        .lastLogin(TimestampHelper.getNowDate())
-                        .token("E23423R234R4.4RQ3453F3FESR34ERRF4E343TAERFEERT4TTEF")
-                        .isActive(true)
-                        .name(signUpRequestDto.getName())
-                        .email(signUpRequestDto.getEmail())
-                        .password(signUpRequestDto.getPassword())
-                        .phones(signUpRequestDto.getPhones())
-                .build());
+    public ResponseEntity<SignUpResponseDto> signUp(@Valid @RequestBody SignUpRequestDto signUpRequestDto) {
+        SignUpResponseDto signUpResponseDto = userService.signUp(signUpRequestDto);
+        return ResponseEntity.ok(signUpResponseDto);
     }
 
 }
