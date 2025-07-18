@@ -1,5 +1,6 @@
 package com.globalogic.GestorUsuarios.util.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,6 +14,7 @@ public class SignUpResponseDto {
     private String created;
     private String lastLogin;
     private String token;
+    @JsonProperty("isActive")
     private boolean isActive;
     private String name;
     private String email;
