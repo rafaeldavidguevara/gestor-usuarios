@@ -31,11 +31,9 @@ public class UserMapper {
                 .id(UUID.randomUUID())
                 .created(TimestampHelper.getNowDate())
                 .lastLogin(TimestampHelper.getNowDate())
-                .token("123123nunujnunu534n5u34534uunu4452348f.34453ni53j53io4toi34foi4")
                 .name((signUpRequestDto.getName() == null || signUpRequestDto.getName().isBlank())
                         ? "" : signUpRequestDto.getName().strip())
                 .email(signUpRequestDto.getEmail())
-                .password(signUpRequestDto.getPassword())
                 .isActive(true)
                 .build();
     }
@@ -58,7 +56,6 @@ public class UserMapper {
                 .id(userEntity.getId())
                 .created(userEntity.getCreated())
                 .lastLogin(userEntity.getLastLogin())
-                .token(userEntity.getToken())
                 .isActive(userEntity.isActive())
                 .name(userEntity.getName())
                 .email(userEntity.getEmail())
