@@ -1,6 +1,6 @@
 package com.globalogic.GestorUsuarios.controller;
 
-import com.globalogic.GestorUsuarios.service.UserService;
+import com.globalogic.GestorUsuarios.service.AuthenticationService;
 import com.globalogic.GestorUsuarios.util.dto.SignUpRequestDto;
 import com.globalogic.GestorUsuarios.util.dto.SignUpResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/auth")
 @RequiredArgsConstructor
-public class UserController {
+public class AuthenticationController {
 
-    private final UserService userService;
+    private final AuthenticationService authenticationService;
 
     @PostMapping(value = "/sign-up", produces = { "application/json" })
     public ResponseEntity<SignUpResponseDto> signUp(@Valid @RequestBody SignUpRequestDto signUpRequestDto) {
-        SignUpResponseDto signUpResponseDto = userService.signUp(signUpRequestDto);
+        SignUpResponseDto signUpResponseDto = authenticationService.signUp(signUpRequestDto);
         return ResponseEntity.ok(signUpResponseDto);
     }
 

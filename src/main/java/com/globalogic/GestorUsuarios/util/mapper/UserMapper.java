@@ -6,25 +6,27 @@ import com.globalogic.GestorUsuarios.util.dto.PhoneDto;
 import com.globalogic.GestorUsuarios.util.dto.SignUpRequestDto;
 import com.globalogic.GestorUsuarios.util.dto.SignUpResponseDto;
 import com.globalogic.GestorUsuarios.util.helper.TimestampHelper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Component
 public class UserMapper {
-    public static UserEntity toEntity(SignUpRequestDto signUpRequestDto) {
+    public UserEntity toEntity(SignUpRequestDto signUpRequestDto) {
         UserEntity userEntity = createUserEntity(signUpRequestDto);
         userEntity.setPhones(createPhoneEntityList(signUpRequestDto, userEntity));
         return userEntity;
     }
 
-    public static SignUpResponseDto toDto(UserEntity userEntity) {
+    public SignUpResponseDto toDto(UserEntity userEntity) {
         SignUpResponseDto  signUpResponseDto = createSignUpResponseDto(userEntity);
         signUpResponseDto.setPhones(createPhoneDtoList(userEntity));
         return signUpResponseDto;
     }
 
-    private static UserEntity createUserEntity(SignUpRequestDto signUpRequestDto) {
+    private UserEntity createUserEntity(SignUpRequestDto signUpRequestDto) {
         return UserEntity.builder()
                 .id(UUID.randomUUID())
                 .created(TimestampHelper.getNowDate())
@@ -38,7 +40,7 @@ public class UserMapper {
                 .build();
     }
 
-    private static List<PhoneEntity> createPhoneEntityList(SignUpRequestDto signUpRequestDto, UserEntity userEntity) {
+    private List<PhoneEntity> createPhoneEntityList(SignUpRequestDto signUpRequestDto, UserEntity userEntity) {
         return signUpRequestDto.getPhones() != null
                 ? signUpRequestDto.getPhones().stream()
                 .map((var phoneDto) -> PhoneEntity.builder()
@@ -51,7 +53,7 @@ public class UserMapper {
                 : List.of();
     }
 
-    private static SignUpResponseDto createSignUpResponseDto(UserEntity userEntity) {
+    private SignUpResponseDto createSignUpResponseDto(UserEntity userEntity) {
         return SignUpResponseDto.builder()
                 .id(userEntity.getId())
                 .created(userEntity.getCreated())
@@ -64,7 +66,7 @@ public class UserMapper {
                 .build();
     }
 
-    private static  List<PhoneDto> createPhoneDtoList(UserEntity userEntity) {
+    private List<PhoneDto> createPhoneDtoList(UserEntity userEntity) {
         return !userEntity.getPhones().isEmpty()
                 ? userEntity.getPhones().stream()
                 .map((var phoneEntity) -> PhoneDto.builder()

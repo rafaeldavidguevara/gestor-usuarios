@@ -10,13 +10,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class AuthenticationService {
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     public SignUpResponseDto signUp(SignUpRequestDto signUpRequestDto) {
-        UserEntity userEntity = UserMapper.toEntity(signUpRequestDto);
+        UserEntity userEntity = userMapper.toEntity(signUpRequestDto);
         UserEntity pesistedUserEntity = userRepository.save(userEntity);
-        return UserMapper.toDto(pesistedUserEntity);
+        return userMapper.toDto(pesistedUserEntity);
     }
 
 }
