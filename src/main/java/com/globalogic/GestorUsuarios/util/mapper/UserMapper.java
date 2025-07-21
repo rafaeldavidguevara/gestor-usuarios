@@ -21,7 +21,7 @@ public class UserMapper {
     }
 
     public ResponseDto toDto(UserEntity userEntity) {
-        ResponseDto responseDto = createSignUpResponseDto(userEntity);
+        ResponseDto responseDto = createResponseDto(userEntity);
         responseDto.setPhones(createPhoneDtoList(userEntity));
         return responseDto;
     }
@@ -51,7 +51,7 @@ public class UserMapper {
                 : List.of();
     }
 
-    private ResponseDto createSignUpResponseDto(UserEntity userEntity) {
+    private ResponseDto createResponseDto(UserEntity userEntity) {
         return ResponseDto.builder()
                 .id(userEntity.getId())
                 .created(userEntity.getCreated())
