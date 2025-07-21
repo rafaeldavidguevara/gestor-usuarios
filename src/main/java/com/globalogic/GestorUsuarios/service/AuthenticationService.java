@@ -1,6 +1,7 @@
 package com.globalogic.GestorUsuarios.service;
 
 import com.globalogic.GestorUsuarios.entity.UserEntity;
+import com.globalogic.GestorUsuarios.exception.BearerTokenException;
 import com.globalogic.GestorUsuarios.exception.EmailAlreadyRegisteredException;
 import com.globalogic.GestorUsuarios.repository.UserRepository;
 import com.globalogic.GestorUsuarios.util.dto.SignUpRequestDto;
@@ -33,8 +34,7 @@ public class AuthenticationService {
     }
 
     public ResponseDto login(String bearerToken) {
-        String jwt = bearerToken.substring(7);
-        String userMail = jwtService.extractUsername(jwt);
+        String userMail = getEmailFromToken(bearerToken);
         UserEntity userEntity = userRepository.findByEmail(userMail)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userMail));
         ResponseDto responseDto = userMapper.toDto(userEntity);
@@ -42,6 +42,17 @@ public class AuthenticationService {
         responseDto.setLastLogin(TimestampHelper.getNowDate());
         responseDto.setToken(jwtService.generateToken(userEntity));
         return responseDto;
+    }
+
+    private String getEmailFromToken(String bearerToken) {
+        String userMail;
+        try {
+            String jwt = bearerToken.substring(7);
+            userMail = jwtService.extractUsername(jwt);
+        } catch (Exception e) {
+            throw (new BearerTokenException("Invalid Bearer Token"));
+        }
+        return userMail;
     }
 
 }
