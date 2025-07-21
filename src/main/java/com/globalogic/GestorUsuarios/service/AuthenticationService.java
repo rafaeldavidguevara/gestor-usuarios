@@ -4,7 +4,7 @@ import com.globalogic.GestorUsuarios.entity.UserEntity;
 import com.globalogic.GestorUsuarios.exception.EmailAlreadyRegisteredException;
 import com.globalogic.GestorUsuarios.repository.UserRepository;
 import com.globalogic.GestorUsuarios.util.dto.SignUpRequestDto;
-import com.globalogic.GestorUsuarios.util.dto.SignUpResponseDto;
+import com.globalogic.GestorUsuarios.util.dto.ResponseDto;
 import com.globalogic.GestorUsuarios.util.mapper.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,16 +18,16 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public SignUpResponseDto signUp(SignUpRequestDto signUpRequestDto) {
+    public ResponseDto signUp(SignUpRequestDto signUpRequestDto) {
         if (userRepository.existsByEmail(signUpRequestDto.getEmail()))
             throw new EmailAlreadyRegisteredException("Another user already registered with email: " + signUpRequestDto.getEmail());
         UserEntity userEntity = userMapper.toEntity(signUpRequestDto);
         userEntity.setPassword(passwordEncoder.encode(signUpRequestDto.getPassword()));
         UserEntity pesistedUserEntity = userRepository.save(userEntity);
-        SignUpResponseDto signUpResponseDto = userMapper.toDto(pesistedUserEntity);
-        signUpResponseDto.setPassword(signUpRequestDto.getPassword());
-        signUpResponseDto.setToken(jwtService.generateToken(userEntity));
-        return signUpResponseDto;
+        ResponseDto responseDto = userMapper.toDto(pesistedUserEntity);
+        responseDto.setPassword(signUpRequestDto.getPassword());
+        responseDto.setToken(jwtService.generateToken(userEntity));
+        return responseDto;
     }
 
 }

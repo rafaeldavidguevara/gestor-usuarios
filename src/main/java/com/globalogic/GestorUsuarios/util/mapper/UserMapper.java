@@ -4,7 +4,7 @@ import com.globalogic.GestorUsuarios.entity.PhoneEntity;
 import com.globalogic.GestorUsuarios.entity.UserEntity;
 import com.globalogic.GestorUsuarios.util.dto.PhoneDto;
 import com.globalogic.GestorUsuarios.util.dto.SignUpRequestDto;
-import com.globalogic.GestorUsuarios.util.dto.SignUpResponseDto;
+import com.globalogic.GestorUsuarios.util.dto.ResponseDto;
 import com.globalogic.GestorUsuarios.util.helper.TimestampHelper;
 import org.springframework.stereotype.Component;
 
@@ -20,10 +20,10 @@ public class UserMapper {
         return userEntity;
     }
 
-    public SignUpResponseDto toDto(UserEntity userEntity) {
-        SignUpResponseDto  signUpResponseDto = createSignUpResponseDto(userEntity);
-        signUpResponseDto.setPhones(createPhoneDtoList(userEntity));
-        return signUpResponseDto;
+    public ResponseDto toDto(UserEntity userEntity) {
+        ResponseDto responseDto = createSignUpResponseDto(userEntity);
+        responseDto.setPhones(createPhoneDtoList(userEntity));
+        return responseDto;
     }
 
     private UserEntity createUserEntity(SignUpRequestDto signUpRequestDto) {
@@ -51,8 +51,8 @@ public class UserMapper {
                 : List.of();
     }
 
-    private SignUpResponseDto createSignUpResponseDto(UserEntity userEntity) {
-        return SignUpResponseDto.builder()
+    private ResponseDto createSignUpResponseDto(UserEntity userEntity) {
+        return ResponseDto.builder()
                 .id(userEntity.getId())
                 .created(userEntity.getCreated())
                 .lastLogin(userEntity.getLastLogin())

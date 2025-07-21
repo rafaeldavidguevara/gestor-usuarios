@@ -2,7 +2,7 @@ package com.globalogic.GestorUsuarios.controller;
 
 import com.globalogic.GestorUsuarios.service.AuthenticationService;
 import com.globalogic.GestorUsuarios.util.dto.SignUpRequestDto;
-import com.globalogic.GestorUsuarios.util.dto.SignUpResponseDto;
+import com.globalogic.GestorUsuarios.util.dto.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,9 +20,9 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping(value = "/sign-up", produces = { "application/json" })
-    public ResponseEntity<SignUpResponseDto> signUp(@Valid @RequestBody SignUpRequestDto signUpRequestDto) {
-        SignUpResponseDto signUpResponseDto = authenticationService.signUp(signUpRequestDto);
-        return ResponseEntity.ok(signUpResponseDto);
+    public ResponseEntity<ResponseDto> signUp(@Valid @RequestBody SignUpRequestDto signUpRequestDto) {
+        ResponseDto responseDto = authenticationService.signUp(signUpRequestDto);
+        return ResponseEntity.ok(responseDto);
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Data
 @Builder
-public class SignUpResponseDto {
+public class ResponseDto {
     private UUID id;
     private String created;
     private String lastLogin;
