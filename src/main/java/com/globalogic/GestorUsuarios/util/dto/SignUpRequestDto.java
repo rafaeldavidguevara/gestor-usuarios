@@ -14,7 +14,7 @@ public class SignUpRequestDto {
     private String name;
     @NotNull(message = "Field email is required")
     @NotBlank(message = "Field email must not be empty")
-    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}$",
             message = "Field email must be a valid email")
     private String email;
     @NotNull(message = "Field password is required")

@@ -34,6 +34,7 @@ public class UserMapper {
                 .name((signUpRequestDto.getName() == null || signUpRequestDto.getName().isBlank())
                         ? "" : signUpRequestDto.getName().strip())
                 .email(signUpRequestDto.getEmail())
+                .password(signUpRequestDto.getPassword())
                 .isActive(true)
                 .build();
     }
@@ -60,6 +61,7 @@ public class UserMapper {
                 .name(userEntity.getName())
                 .email(userEntity.getEmail())
                 .password(userEntity.getPassword())
+                .lastLogin(userEntity.getLastLogin())
                 .build();
     }
 
