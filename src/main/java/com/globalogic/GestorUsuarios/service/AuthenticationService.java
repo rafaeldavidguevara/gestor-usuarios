@@ -50,8 +50,8 @@ public class AuthenticationService {
         String userMail;
         if (bearerToken == null || !bearerToken.startsWith("Bearer "))
             throw new BearerTokenException("Invalid Bearer Token");
+        String jwt = bearerToken.substring(7);
         try {
-            String jwt = bearerToken.substring(7);
             userMail = jwtService.extractUsername(jwt);
         } catch (Exception e) {
             throw (new BearerTokenException("Invalid Bearer Token"));
