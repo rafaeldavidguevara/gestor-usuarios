@@ -34,7 +34,6 @@ public class UserMapper {
                 .name((signUpRequestDto.getName() == null || signUpRequestDto.getName().isBlank())
                         ? "" : signUpRequestDto.getName().strip())
                 .email(signUpRequestDto.getEmail())
-                .password(signUpRequestDto.getPassword())
                 .isActive(true)
                 .build();
     }

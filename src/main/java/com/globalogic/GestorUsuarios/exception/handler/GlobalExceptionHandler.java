@@ -1,6 +1,7 @@
 package com.globalogic.GestorUsuarios.exception.handler;
 
 import com.globalogic.GestorUsuarios.exception.BearerTokenException;
+import com.globalogic.GestorUsuarios.exception.EncoderException;
 import com.globalogic.GestorUsuarios.exception.UserAuthenticationException;
 import com.globalogic.GestorUsuarios.util.response.ErrorElement;
 import com.globalogic.GestorUsuarios.util.response.ErrorResponse;
@@ -53,6 +54,19 @@ public class GlobalExceptionHandler {
                 .error(List.of(errorElement))
                 .build();
         return new ResponseEntity<>(errorResponse, ex.getStatus());
+    }
+
+    @ExceptionHandler(EncoderException.class)
+    public ResponseEntity<ErrorResponse> handleEncoderException(EncoderException ex) {
+        ErrorElement errorElement = ErrorElement.builder()
+                .timestamp(Timestamp.valueOf(java.time.LocalDateTime.now()))
+                .codigo(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .detail(ex.getMessage())
+                .build();
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .error(List.of(errorElement))
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
