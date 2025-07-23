@@ -23,8 +23,7 @@ public class AuthenticationService {
 
     public ResponseDto signUp(SignUpRequestDto signUpRequestDto) {
         if (userRepository.existsByEmail(signUpRequestDto.getEmail()))
-            throw new UserAuthenticationException("Another user already registered with email: "
-                    + signUpRequestDto.getEmail(), HttpStatus.CONFLICT);
+            throw new UserAuthenticationException("Another user already registered with given email", HttpStatus.CONFLICT);
         UserEntity userEntity = userMapper.toEntity(signUpRequestDto);
         userEntity.setPassword(passwordEncoder.encrypt(signUpRequestDto.getPassword()));
         UserEntity pesistedUserEntity = userRepository.save(userEntity);
@@ -37,8 +36,7 @@ public class AuthenticationService {
     public ResponseDto login(String bearerToken) {
         String userMail = getEmailFromToken(bearerToken);
         UserEntity userEntity = userRepository.findByEmail(userMail)
-                .orElseThrow(() -> new UserAuthenticationException("User not found with email: "
-                        + userMail, HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new UserAuthenticationException("User not found with given email", HttpStatus.NOT_FOUND));
         userEntity.setLastLogin(TimestampHelper.getNowDate());
         userEntity.setPassword(passwordEncoder.decrypt(userEntity.getPassword()));
         ResponseDto responseDto = userMapper.toDto(userEntity);
