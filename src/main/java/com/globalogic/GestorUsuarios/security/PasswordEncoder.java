@@ -1,4 +1,4 @@
-package com.globalogic.GestorUsuarios.util.encode;
+package com.globalogic.GestorUsuarios.security;
 
 import com.globalogic.GestorUsuarios.exception.EncoderException;
 import org.springframework.beans.factory.annotation.Value;

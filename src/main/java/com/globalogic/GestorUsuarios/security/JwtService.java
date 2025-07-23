@@ -1,4 +1,4 @@
-package com.globalogic.GestorUsuarios.service;
+package com.globalogic.GestorUsuarios.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
