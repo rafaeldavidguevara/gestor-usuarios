@@ -37,7 +37,7 @@ public class AuthenticationService {
     public ResponseDto login(String bearerToken) {
         String userMail = getEmailFromToken(bearerToken);
         UserEntity userEntity = userRepository.findByEmail(userMail)
-                .orElseThrow(() -> new UserAuthenticationException("User not found with given email", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new UserAuthenticationException("User not found with given token", HttpStatus.NOT_FOUND));
         userEntity.setLastLogin(TimestampHelper.getNowDate());
         userEntity.setPassword(passwordEncryptor.decrypt(userEntity.getPassword()));
         ResponseDto responseDto = userMapper.toDto(userEntity);

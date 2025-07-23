@@ -24,7 +24,7 @@ public class PhoneEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long number;
-    private String citycode;
+    private Integer citycode;
     private String countrycode;
     @ManyToOne
     @JoinColumn(name = "user_id")
