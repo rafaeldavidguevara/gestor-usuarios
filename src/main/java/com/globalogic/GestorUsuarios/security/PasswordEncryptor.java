@@ -9,7 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 
 @Component
-public class PasswordEncoder {
+public class PasswordEncryptor {
     @Value("${security.pass.algorithm}")
     private String ALGORITHM;
     @Value("${security.pass.secret-key}")
