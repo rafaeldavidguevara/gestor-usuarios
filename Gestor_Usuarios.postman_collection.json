@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "310f6acb-933d-44d9-a907-9c0c35836520",
+		"name": "Gestor_Usuarios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46503939",
+		"_collection_link": "https://rd-1192723.postman.co/workspace/Rd's-Workspace~3bd15222-4d66-4ff7-889d-3039a46bf79e/collection/46503939-310f6acb-933d-44d9-a907-9c0c35836520?action=share&source=collection_link&creator=46503939"
+	},
+	"item": [
+		{
+			"name": "signUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"simon\",\n    \"email\": \"simmon3@gmail.com\",\n    \"password\": \"ps8eSgg7yu\",\n    \"phones\": [\n            {\n                \"number\": 45445,\n                \"citycode\": 33,\n                \"countrycode\": \"+66\"\n            },\n                        {\n                \"number\": 3443,\n                \"citycode\": 21,\n                \"countrycode\": \"+66\"\n            } ,\n                        {\n                \"number\": 343434,\n                \"citycode\": 11,\n                \"countrycode\": \"+66\"\n            }        \n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/sign-up",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "headerPrefix",
+							"value": "Bearer ",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
