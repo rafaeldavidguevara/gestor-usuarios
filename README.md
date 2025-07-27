@@ -6,4 +6,9 @@ en la esquina superior derecha del IDE IntelliJ.
 
 En el directorio raíz del proyecto se encuentra la colección Postman con requests para los endpoints /signup y /login.
 Los diagramas de secuencia y componentes se encuentran en la carpeta Diagramas dentro del proyecto.
-El proyecto utiliza java 11 y gradle 7.4
+
+El proyecto utiliza java 11 y gradle 7.4. Puede setear la versión de Java en File->Project Structure->Project->SDK
+
+<img width="1035" height="368" alt="Screenshot from 2025-07-27 14-41-11" src="https://github.com/user-attachments/assets/3b9cf2a4-6a3a-4e69-8822-694631e139dd" />
+
+
